@@ -145,3 +145,62 @@ function identityMatrix(n){
 }
 
 // O(n^2)
+
+
+function coinChange(num) {
+  if (Number.isInteger(num)) {
+    var dollars = 0
+    var dimes = 0
+    var pennies = 0
+    var nickels = 0
+    var quarters = 0
+    var my_dictionary = {}
+    
+    while(num >= 100) {
+      num -= 100
+      dollars += 1
+      my_dictionary["dollars"] = dollars
+    }
+    while(num >= 25) {
+      num-= 25
+      quarters += 1
+      my_dictionary["quarters"] = quarters
+    }
+    while (num >= 10) {
+      num -= 10
+      dimes += 1
+      my_dictionary["dimes"] = dimes
+    }
+    while (num >= 5) {
+      num -= 5
+      nickels += 1
+      my_dictionary["nickels"] = nickels
+    }
+    while (num >= 1) {
+      num -= 1
+      pennies += 1
+      my_dictionary["pennies"] = pennies
+    }
+    return my_dictionary
+  }
+  else {
+    var newnum = 0
+    for(var key in num) {
+      if (key == "dollars") {
+        newnum += num[key] * 100
+      } else if (key == "quarters") {
+        newnum += num[key] * 25
+      } else if (key == "dimes") {
+        newnum += num[key] * 10
+      } else if (key == "nickels") {
+        newnum += num[key] * 5
+      } else if (key == "pennies") {
+        newnum += num[key]
+      }
+    }
+    return coinChange(newnum)
+  }
+  
+}
+
+coinChange({dollars: 2, dimes: 15, pennies: 5})

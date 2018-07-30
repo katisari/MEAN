@@ -206,8 +206,6 @@ function coinChange(num) {
 coinChange({dollars: 2, dimes: 15, pennies: 5})
 
 
-
-
 function userLanguages(users) {
   var bigstring = ""
   for(var i = 0; i < users.length; ++i) {
@@ -236,3 +234,47 @@ function userLanguages(users) {
   }
   return bigstring
 }
+
+console.log(userLanguages(users))
+
+
+
+
+
+function binarySearch(arr, num, start_index = 0, end_index = arr.length-1) {
+  if ((start_index > end_index) || (end_index < start_index)) {
+    return -1
+  }
+  var center_index = Math.floor((start_index + end_index)/2)
+  if (num > arr[center_index]) {
+    return binarySearch(arr, num, center_index+1, end_index)
+  }
+  else if (num < arr[center_index]) {
+    return binarySearch(arr, num, start_index, center_index-1)
+  }
+  else if (num == arr[center_index]) {
+    return center_index
+  }
+}
+
+
+function no_recurse_binarySearch(arr, num) {
+  var start_index = 0;
+  var end_index = arr.length-1;
+  while (start_index <= end_index) {
+    console.log("PRINT")
+    var center_index = Math.floor((start_index + end_index)/2)
+    if (num > arr[center_index]) {
+      start_index = center_index+1;
+    }
+    else if (num < arr[center_index]) {
+      end_index = center_index - 1;
+    }
+    else if (num == arr[center_index]) {
+      return center_index;
+    }
+  }
+  return -1;
+}
+
+no_recurse_binarySearch([1, 3, 8, 10, 12, 15, 17, 20, 22, 34, 38, 40, 50, 52, 78, 87, 90, 91, 92, 94], 15)

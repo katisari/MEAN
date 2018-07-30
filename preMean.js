@@ -72,3 +72,77 @@ function bracesValid(brace_comb) {
 }
 
 bracesValid("{{()}}[]")
+
+
+
+function bubbleSort(arr) {
+  for (var i = 0; i < arr.length-1; ++i) {
+    var sorted = true
+    for (var j = 0; j < arr.length - i - 1; ++j) {
+      if (arr[j] > arr[j+1]) {
+        var temp = arr[j]
+        arr[j] = arr[j+1]
+        arr[j+1] = temp
+        sorted = false
+      }
+    }
+    if (sorted) {
+      return arr
+    }
+  }
+  return arr
+}
+
+bubbleSort([3,2,4,2,4,-1, -5, 2])
+
+
+
+
+//  Classifying functions by Big-O
+
+function printArray(arr){
+    for(var i=0; i<arr.length; i++){
+        console.log(arr[i]);
+    }
+}
+
+// O(n)
+
+function printArray(arr){
+    for(var i=0; i<arr.length; i++){
+        console.log(arr[i]);
+    }
+}
+
+// O(1)
+
+function halving(n){
+    var count = 0;
+    while(n > 1){
+        n = n/2;
+        count++;
+    }
+    return count;
+}
+
+// O(n)
+
+
+function identityMatrix(n){
+  var matrix = [];
+  for(var i=0; i < n; i++){
+    var row = [];
+    for(var j=0; j < n; j++){
+      if(j == i){
+        row.push(1);
+      }
+      else{
+        row.push(0);
+      }
+    }
+    matrix.push(row);
+  }
+  return matrix;
+}
+
+// O(n^2)

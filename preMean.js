@@ -204,3 +204,35 @@ function coinChange(num) {
 }
 
 coinChange({dollars: 2, dimes: 15, pennies: 5})
+
+
+
+
+function userLanguages(users) {
+  var bigstring = ""
+  for(var i = 0; i < users.length; ++i) {
+    bigstring += users[i].fname + " "
+    bigstring += users[i].lname + " knows "
+    for (var j = 0; j < users[i].languages.length; ++j) {
+      if (j == users[i].languages.length - 1) {
+        bigstring += "and " + users[i].languages[j] + ".\n"
+      } else {
+        bigstring += users[i].languages[j] + ", "
+      }
+    }
+    bigstring += users[i].fname + " is also interested in "
+    var count = 1
+    for (var interest_key in users[i].interests) {
+      for (var k = 0; k < users[i].interests[interest_key].length; k++) {
+        if ((count == Object.keys(users[i].interests).length) && (k == users[i].interests[interest_key].length-1)) {
+          bigstring += "and " + users[i].interests[interest_key][k] + ". \n"
+        }
+        else {
+          bigstring += users[i].interests[interest_key][k] + ", "
+        }
+      }
+      count += 1
+    }
+  }
+  return bigstring
+}

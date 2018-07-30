@@ -55,15 +55,14 @@
         heffalumps.west = eeyone
 
         function move(direction) {
-        if (!(player.location["east"] in player.location)) {
-            console.log("You may not go that way!")
-            return
+            try {
+                console.log("You are at " + player.location[direction].character + "\'s house")
+                player.location = player.location[direction]
+            }
+            catch(error) {
+                console.log("You may not go that way!")
+            }
         }
-        console.log("You are at " + player.location[direction].character + "\'s house")
-        player.location = player.location[direction]
-        }
-
-        move("east")
     
     </script>
 </head>

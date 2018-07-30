@@ -50,7 +50,7 @@
             console.log("HEELLOO! I'm Heffaumps");
             }
         };
-        var player = {location: tigger}
+        var player = {location: tigger, honey: false}
 
         tigger.north = pooh;
 
@@ -87,6 +87,13 @@
 
         heffalumps.west = eeyone
 
+        function mission() {
+            var places = [tigger, pooh, piglet, owl, robin, gopher, rabbit, kanga, eeyone, heffalumps];
+            var random_num = Math.floor(Math.random() * 10); 
+            console.log(places[random_num].character + "is looking for honey! Can you help?")
+            player.mission = places[random_num]
+        }
+
         function move(direction) {
             try {
                 console.log("You are at " + player.location[direction].character + "\'s house")
@@ -97,6 +104,25 @@
                 console.log("You may not go that way!")
             }
         }
+
+        function pickUp() {
+            if (player.location.character == "Bees") {
+                player.honey = true
+                console.log("You've gathered some honey!")
+            } else {
+                console.log("Whoops! This isn't the place that needs the honey!")
+            }
+        }
+
+        function drop() {
+            if (player.location == player.mission) {
+                console.log("Congratulations! You delivered the honey to " + player.mission.character + "!")
+                player.honey = false
+            } else {
+                console.log("This isn't the place that needs the honey!")
+            }
+        }
+        mission()
 
     </script>
 </head>

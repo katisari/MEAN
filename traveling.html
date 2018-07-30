@@ -1,67 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script>
-        var tigger = {character: "Tigger"};
-        var pooh = {character: "Winnie the Pooh" };
-        var piglet = {character: "Piglet"};
-        var bees = {character: "Bees"}
-        var owl = {character: "Owl"}
-        var robin = {character: "Christopher Robin"}
-        var gopher = {character: "Gopher"}
-        var rabbit = {character: "Rabbit"}
-        var kanga = {character: "Kanga"}
-        var eeyone = {character: "Eeyore"}
-        var heffalumps = {character: "Heffaumps"}
-        var player = {location: tigger}
+var tigger = {character: "Tigger"};
+var pooh = {character: "Winnie the Pooh" };
+var piglet = {character: "Piglet"};
+var bees = {character: "Bees"}
+var owl = {character: "Owl"}
+var robin = {character: "Christopher Robin"}
+var gopher = {character: "Gopher"}
+var rabbit = {character: "Rabbit"}
+var kanga = {character: "Kanga"}
+var eeyone = {character: "Eeyore"}
+var heffalumps = {character: "Heffaumps"}
+var player = {location: tigger}
 
-        tigger.north = pooh;
+tigger.north = pooh;
 
-        pooh.south = tigger;
-        pooh.east = bees
-        pooh.north = robin
-        tigger.north.west = piglet;
+pooh.south = tigger;
+pooh.east = bees
+pooh.north = robin
+tigger.north.west = piglet;
 
-        piglet.east = tigger.north;
-        piglet.north = owl
+piglet.east = tigger.north;
+piglet.north = owl
 
-        piglet.north.east = robin
-        owl.south = piglet
+piglet.north.east = robin
+owl.south = piglet
 
-        bees.west = pooh
-        bees.north = rabbit
+bees.west = pooh
+bees.north = rabbit
 
-        rabbit.west = robin
-        rabbit.south = pooh.east
-        rabbit.east = gopher
+rabbit.west = robin
+rabbit.south = pooh.east
+rabbit.east = gopher
 
-        rabbit.east.west = rabbit
+rabbit.east.west = rabbit
 
-        robin.west = owl
-        robin.east = rabbit
-        robin.south = pooh
-        robin.north = kanga
+robin.west = owl
+robin.east = rabbit
+robin.south = pooh
+robin.north = kanga
 
-        kanga.south = robin
-        kanga.north = eeyone
+kanga.south = robin
+kanga.north = eeyone
 
-        kanga.north.south = kanga
-        kanga.north.east = heffalumps
+kanga.north.south = kanga
+kanga.north.east = heffalumps
 
-        heffalumps.west = eeyone
+heffalumps.west = eeyone
 
-        function move(direction) {
-            console.log("You are at " + player.location[direction].character + "\'s house")
-            player.location = player.location[direction]
-        }
-    
-    </script>
-</head>
-<body>
-    
-</body>
-</html>
+function move(direction) {
+  if (!(player.location["east"] in player.location)) {
+    console.log("You may not go that way!")
+    return
+  }
+  console.log("You are at " + player.location[direction].character + "\'s house")
+  player.location = player.location[direction]
+}
+
+move("east")

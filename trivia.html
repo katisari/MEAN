@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trivia</title>
+    <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <style>
+        h1 {
+            display:inline;
+        }
+        .category {
+            vertical-align: top;
+            width: 30%;
+            display:inline-block;
+            text-align: center;
+            margin: 20px;
+        }
+            .category .quest_box{
+                width: 60%;
+                height: 200px;
+                background-color:lightblue;
+                margin: 20px;
+            }
+    
+    </style>
+    <script>
+        $(document).ready(function(){
+            $.get("https://opentdb.com/api.php?amount=10&type=multiple", function(data){
+                var results = data.results
+                for (var i = 0; i < 9; ++i) {
+                    let thequeststring = "#question" + (i+1)
+                    let theanstring = "#answer" + (i+1)
+                    $(thequeststring).html(results[i].question);
+                    for (var j = 0; j < results[i].incorrect_answers.length; ++j) {
+                        console.log("HELLO")
+                        $(theanstring).find("form").append("<input type='radio' id='huey' name='answer_choice'>" + results[i].incorrect_answers[j] +"<br>")
+                    }
+                    $(theanstring).find("form").append("<input type='radio' id='huey' name='answer_choice'>" + results[i].correct_answer + "<br>")
+                }
+                $(".theform").click(function() {
+                    $(this).parentsUntil(".category").css("background-color", "gray");
+                })
+            });
+        });
+    
+    
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <a href="">Continue with new questions</a>
+            <h1>Trivia Night</h1>
+            <h1>300 Points</h1>
+        </div>
+        <div class="category">
+            <h3>Geography</h3>
+            <div class="quest_box">
+                <div id = "question1">
+                </div>
+                <div id = "answer1">
+                    <form name="myForm" method="post" class="theform">
+                    </form>
+                </div>
+            </div>
+            <div class="quest_box">
+                <div id = "question2">
+
+                </div>
+                <div id = "answer2">
+                    <form name="myForm" method="post" class="theform">
+                    </form>
+                </div>
+            </div>
+            <div class="quest_box">
+                <div id = "question3">
+
+                </div>
+                <div id = "answer3">
+                    <form name="myForm" method="post" class="theform">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="category">
+            <h3>Entertainment</h3>
+            <div class="quest_box">
+                <div id = "question4">
+
+                </div>
+                <div id = "answer4">
+                    <form name="myForm" method="post" class="theform">
+                    </form>
+                </div>
+
+            </div>
+            <div class="quest_box">
+                <div id = "question5">
+
+                </div>
+                <div id = "answer5">
+                    <form name="myForm" method="post" class="theform">
+                    </form>
+                </div>
+            </div>
+            <div class="quest_box">
+                <div id = "question6">
+
+                </div>
+                <div id = "answer6">
+                    <form name="myForm" method="post" class="theform">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="category">
+            <h3>Science</h3>
+            <div class="quest_box">
+                <div id = "question7">
+
+                </div>
+                <div id = "answer7">
+                    <form name="myForm" method="post" class="theform">
+                    </form>
+                </div>
+            </div>
+            <div class="quest_box">
+                <div id = "question8">
+
+                </div>
+                <div id = "answer8">
+                    <form name="myForm" method="post" class="theform">
+                    </form>
+                </div>
+            </div>
+            <div class="quest_box">
+                <div id = "question9">
+
+                </div>
+                <div id = "answer9">
+                    <form name="myForm" method="post" class="theform">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    
+</body>
+</html>

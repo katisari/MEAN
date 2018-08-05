@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Socket Survey Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var socket = io();
+            $("form").submit(function() {
+                console.log("SIUBMITED")
+                socket.emit('posting_form', {name: $("#name").val(), location: $("#location").val(), language: $("#language").val(), comments: $("#comments").val()});
+                return false;
+            })
+            socket.on('updated_message', function(data) {
+                $("#msg_display").html("You emitted the following information to the server: " + data.msg);
+            });
+            socket.on('random_num', function(data) {
+                $("#num_display").html("Your lucky number emitted by the server is " + data.msg);
+            })
+            
+        })
+    </script>
+    <style>
+        #show_info {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="show_info">
+        <p id="msg_display"></p>
+        <p id="num_display"></p>
+    </div>
+
+    <form>
+        <div class="form-group">
+          <label for="name">Your Name: </label>
+          <input type="text" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+            <label for="location">Location: </label>
+            <select class="form-control" id="location">
+                <option value="San Jose">San Jose</option>
+                <option value="Seattle">Seattle</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="location">Language: </label>
+            <select class="form-control" id="language">
+                <option value="C++">C++</option>
+                <option value="JavaScript">JavaScript</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="comment">Comments</label>
+            <textarea class="form-control" id="comments" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+      </form>
+</body>
+</html>

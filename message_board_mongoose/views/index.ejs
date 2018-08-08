@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Message Board</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .msg_posted{
+            padding: 20px;
+        }
+        .sub_msg_posted{
+            padding: 0px 50px;
+        }
+
+    
+    </style>
+</head>
+<body>
+    <% JSON.stringify(messages)  %>
+    <% if (messages.new_blog) { %>
+        <% for (var x of messages.new_blog) { %>
+            <h3><%=x %></h3>
+        <%} %>
+    <% } %>
+    <h1>The Message Board</h1>
+    <form action="/post_msg" method="post">
+        <div class="form-group">
+            <label for="name">Name: </label>
+            <input type="text" name="name" class="form-control"><br>
+            <label for="msg">Message: </label>
+            <textarea name="msg" class="form-control"></textarea>
+            <button type="submit" class="btn btn-primary">Post Message</button>
+        </div>
+    </form>
+    <% for (var msg of all_blogs) { %>
+        <div class="msg_posted">
+            <h2> Name: <%=msg.name%></h2>
+            <h2> Message: <%= msg.content %></h2>
+            <div class="sub_msg_posted">
+                <% if (msg.comments.length > 0) {%>
+                    <% for (var individual_comment of msg.comments) { %>
+                        <h4>Name: <%=individual_comment.name %></h4>
+                        <h4>Comment: <%= individual_comment.content %></h4>
+                    <% } %>
+                <% } %>
+                <form action="/post_comment/<%= msg._id%>" method="post">
+                    <div class="form-group">
+                        <label for="name">Name: </label>
+                        <input type="text" name="name" class="form-control"><br>
+                        <label for="msg">Comment: </label>
+                        <textarea name="msg" class="form-control"></textarea>
+                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    <% } %>
+</body>
+</html>

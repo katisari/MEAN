@@ -112,7 +112,7 @@ var math = (x, y) => {
 // #7
 class Elephant {
    constructor(public age: number){}
-    birthday = age => { this.age++ };
+    birthday = () => { this.age++ };
                                              
    }
 }
